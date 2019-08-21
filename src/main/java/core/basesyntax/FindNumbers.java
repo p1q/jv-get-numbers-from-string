@@ -20,7 +20,8 @@ public class FindNumbers {
 
         for (int i = 0; i < text.length(); i++) {
             if (isDigit(text.substring(i, i + 1))) {
-                int tmp = Integer.valueOf(text.substring(i, i + countDigitsQuantity(text.substring(i))));
+                int tmp = Integer.valueOf(text.substring(i,
+                        i + countDigitsQuantity(text.substring(i))));
 
                 if (i > 0 && text.charAt(i - 1) == '-') {
                     tempArray[tempArrayCurrentIndex] = -tmp * 2;
