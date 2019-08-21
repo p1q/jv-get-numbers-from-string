@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Arrays;
-
 public class FindNumbers {
 
     /**
@@ -15,47 +13,13 @@ public class FindNumbers {
      * числа 96, 18, 26 и 0.</p>
      */
     public int[] getAllNumbers(String text) {
-        int[] tempArray = new int[text.length()];
-        int tempArrayCurrentIndex = 0;
+        text = text.replaceAll("[^0-9, -]"," ").trim();
+        String[] numbersString = text.split("\\s+");
 
-        for (int i = 0; i < text.length(); i++) {
-            if (isDigit(text.substring(i, i + 1))) {
-                int tmp = Integer.valueOf(text.substring(i,
-                        i + countDigitsQuantity(text.substring(i))));
-
-                if (i > 0 && text.charAt(i - 1) == '-') {
-                    tempArray[tempArrayCurrentIndex] = -tmp * 2;
-                } else {
-                    tempArray[tempArrayCurrentIndex] = tmp * 2;
-                }
-
-                tempArrayCurrentIndex++;
-                i += countDigitsQuantity(text.substring(i));
-            }
+        int[] numbersInt = new int[numbersString.length];
+        for (int i = 0; i < numbersString.length; i++) {
+            numbersInt[i] = Integer.valueOf(numbersString[i]) * 2;
         }
-        return Arrays.copyOf(tempArray, tempArrayCurrentIndex);
-    }
-
-    private boolean isDigit(String subString) {
-        if (subString != null && !subString.isEmpty()) {
-            String digits = "0123456789";
-            return digits.contains(subString);
-        } else {
-            return false;
-        }
-    }
-
-    private int countDigitsQuantity(String subString) {
-        int counter = 0;
-        int i = 0;
-
-        while (isDigit(subString.substring(i, i + 1))) {
-            counter++;
-            i++;
-            if (i == subString.length()) {
-                break;
-            }
-        }
-        return counter;
+        return numbersInt;
     }
 }
